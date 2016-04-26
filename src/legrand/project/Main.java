@@ -30,6 +30,8 @@ public class Main extends StateBasedGame{
 		this.addState(new CombatState());
 		this.addState(new InventoryState());
 		this.addState(new LobbyState());
+		this.addState(new LoadingState());
+		this.addState(new DungeonState());
 		this.enterState(1);
 	}
 	

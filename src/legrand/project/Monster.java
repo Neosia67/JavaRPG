@@ -6,8 +6,8 @@ public class Monster extends Entity{
 	private Rarity rarity;
 	private Item loot;
 	
-	public Monster(Rarity r){
-		super("Gobelin", 1, 100, 100, 5, 1, 2, 1);
+	public Monster(Rarity r, int l){
+		super("Gobelin", l, 100, 100, 5, 1, 2, 1);
 		this.rarity = r;
 		Random rnd = new Random();
 		int rar = rnd.nextInt(2);

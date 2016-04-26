@@ -6,6 +6,8 @@ public class Player extends Entity{
 	private int baseDef;
 	private int baseSpeed;
 	private int baseMaxhp;
+	private int xp;
+	private int healPotion;
 	
 	public Player(String n, int d, int def, int s){
 		super(1, 100, 1);
@@ -27,25 +29,43 @@ public class Player extends Entity{
 		this.baseDef = 0;
 		this.baseMaxhp = 0;
 		this.baseSpeed = 0;
-	}
-	
-	public void equip(Item i){
-		if(i instanceof Weapon)
-			equipw((Weapon)i);
-		else
-			equipa((Armor)i);
+		this.xp = 0;
+		this.healPotion = 5;
 	}
 
-	public void equipw(Weapon w){
+	public void equip(Item i){
+		if(i instanceof Weapon)
+			equip((Weapon)i);
+		else
+		{
+			if(i instanceof Armor)
+				equip((Armor)i);
+		}
+	}
+	
+	public void equip(Weapon w){
 		stuff.addWeapon(w);
 		this.damage = baseDam + w.getDamage();
 		this.speed = baseSpeed + w.getSpeed();
 	}
 	
-	public void equipa(Armor a){
+	public void equip(Armor a){
 		stuff.addArmor(a);
 		this.defense = baseDef + a.getDefense();
 		this.maxhealth = baseMaxhp + a.getLife();
+	}
+	
+	public void delInv(Item i){
+		stuff.delInv(i);
+	}
+	
+	public void heal(){
+		if(healPotion < 0)
+		{
+			if(health <= maxhealth * 0.8)
+				health *= 1.2;
+			healPotion--;
+		}
 	}
 	
 	public void getloot(Item i){
@@ -75,6 +95,14 @@ public class Player extends Entity{
 		baseMaxhp = i;
 		health = i;
 		maxhealth = i;
+	}
+	
+	public void setXp(int i){
+		xp += i;
+	}
+	
+	public void levelup(){
+		if()
 	}
 	
 	public Stuff getStuff(){

@@ -29,8 +29,6 @@ public class OptionMenuState extends BasicGameState{
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		int w = gc.getWidth() / 2;
-		int h = gc.getHeight() / 2;
 		Input input = gc.getInput();
 		if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON))
 		{

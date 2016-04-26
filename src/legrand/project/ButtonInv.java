@@ -2,6 +2,7 @@ package legrand.project;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 
 public class ButtonInv extends Button {
 	private Item item;
@@ -79,6 +80,21 @@ public class ButtonInv extends Button {
 			}
 			// else
 			// potion
+		}
+	}
+
+	public void clicked(Input input, ButtonInv e1, ButtonInv e2, Player p) {
+		if (isClicked(input.getMouseX(), input.getMouseY())) {
+			if (!isEmpty()) {
+				p.equip(item);
+				if (item instanceof Weapon)
+					changeItem(e1);
+				else {
+					if (item instanceof Armor)
+						changeItem(e2);
+				}
+				p.delInv(item);
+			}
 		}
 	}
 

@@ -14,14 +14,23 @@ public class CombatState extends BasicGameState{
 	private boolean fight;
 	private Button begin;
 	private Button use;
+	private Button done;
+	private Button potion;
 	
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		monster = new Monster(Rarity.COMMON);
 		fight = false;
-		begin = new Button("Begin", 100, 100, gc);
+		begin = new Button("Begin", gc.getWidth() / 2, 150, gc);
 		use = new Button("Use", 100, 150, gc);
+		done = new Button("Done", gc.getWidth() / 2, 200, gc);
+		potion = new Button("Use Potion", 350, 500, gc);
+	}
+	
+	@Override
+	public void enter(GameContainer gc, StateBasedGame sbg){
+		fight = false;
+		monster = new Monster(Rarity.COMMON, player.getLevel());
 	}
 
 	@Override
@@ -29,12 +38,14 @@ public class CombatState extends BasicGameState{
 		int w = gc.getWidth() / 2;
 		int h = gc.getHeight() / 2;
 		begin.render(g);
+		potion.render(g);
 		g.drawString(player.getname(), w / 2 - 20, h - 50);
 		g.drawString("\\o/", w / 2, h - 20);
 		g.drawString(" | ", w / 2, h - 5);
 		g.drawString("/ \\", w / 2, h + 10);
-		g.drawString(monster.getname(), w / 2 + w - 15, h - 50);
 		g.drawString(player.gethealth() + "/" + player.getmaxhealth(), w / 2 - 15, h + 25);
+		
+		g.drawString(monster.getname(), w / 2 + w - 15, h - 50);
 		g.drawString("\\o/", w / 2 + w, h - 20);
 		g.drawString(" | ", w / 2 + w, h - 5);
 		g.drawString("/ \\", w / 2 + w, h + 10);
@@ -46,6 +57,7 @@ public class CombatState extends BasicGameState{
 			g.drawString("Dead", w / 2 + w - 40, h + 25);
 			use.render(g);
 			g.drawString(monster.getLoot().getName(), 150, 150);
+			done.render(g);
 		}
 		g.drawString("Time : " + time/1000, w, 100);
 		
@@ -64,7 +76,11 @@ public class CombatState extends BasicGameState{
 			if(begin.isClicked(input.getMouseX(), input.getMouseY()))
 				fight = true;
 			if(use.isClicked(input.getMouseX(), input.getMouseY()))
-				player.equip(monster.getLoot());
+				player.getloot(monster.getLoot());
+			if(done.isClicked(input.getMouseX(), input.getMouseY()))
+				sbg.enterState(7);
+			if(potion.isClicked(input.getMouseX(), input.getMouseY()))
+				player.heal();
 		}
 		if(fight)
 		{
@@ -81,7 +97,7 @@ public class CombatState extends BasicGameState{
 
 	@Override
 	public int getID() {
-		return 3;
+		return 8;
 	}
 	
 	public void setFight(boolean b){

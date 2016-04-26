@@ -31,7 +31,7 @@ public class CharacterCreationState extends BasicGameState{
 		damage = 1;
 		speed = 1;
 		defense = 1;
-		points = 5;
+		points = 10;
 		int w = gc.getWidth() / 2;
 		int h = gc.getHeight() / 2;
 		speedp = new Button("+", w - gc.getGraphics().getFont().getWidth("+") / 2 + 50, 290, gc);
@@ -49,7 +49,6 @@ public class CharacterCreationState extends BasicGameState{
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		int w = gc.getWidth() / 2;
-		int h = gc.getHeight() / 2;
 		g.drawString("Character Creation", w - g.getFont().getWidth("Character creation") / 2, 100);
 		g.drawString("Select Stats", w - g.getFont().getWidth("Select Stats") / 2, 150);
 		g.drawString("Points : " + points, w - g.getFont().getWidth("Points :  ") / 2, 200);
@@ -81,7 +80,7 @@ public class CharacterCreationState extends BasicGameState{
 				player.setDefense(defense);
 				player.setSpeed(speed);
 				player.setLife(100);
-				sbg.enterState(6);
+				sbg.enterState(5);
 			}
 			if(damagep.isClicked(input.getMouseX(), input.getMouseY()))
 			{

@@ -18,9 +18,9 @@ public class Stuff {
 			equipment[i] = new Item();
 	}
 	
-	public void addWeapon(Weapon w){
+	public void addWeapon(Item i){
 		addInv(equipment[0]);
-		equipment[0] = w;
+		equipment[0] = i;
 	}
 	
 	public void addArmor(Armor a){
@@ -42,6 +42,13 @@ public class Stuff {
 			}
 			full = (j == max - 1);
 		}
+	}
+	
+	public void delInv(Item i){
+		int n = 0;
+		while(inventory[n] != i)
+			n++;
+		inventory[n] = new Item();
 	}
 	
 	public Item getInv(int i){
