@@ -99,20 +99,22 @@ public class Player extends Entity{
 	
 	public void setXp(int i){
 		xp += i;
+		levelup();
 	}
 	
 	public void levelup(){
-		if()
+		int lvl = level + 1;
+		if(xp >= 3 * ((lvl*lvl*lvl) - 6 * (lvl*lvl) + 17 * lvl - 12))
+		{
+			xp -= 3 * ((lvl*lvl*lvl) - 6 * (lvl*lvl) + 17 * lvl - 12);
+			level ++;
+		}
 	}
+	
 	
 	public Stuff getStuff(){
 		return stuff;
 	}
 	
-	@Override
-	public void death() {
-		dead = true;
-		
-	}
 
 }

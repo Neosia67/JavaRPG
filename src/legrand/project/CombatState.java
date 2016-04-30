@@ -9,7 +9,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class CombatState extends BasicGameState{
 	private Player player = Main.getPlayer();
-	private Monster monster;
+	private Monster monster = Main.getMonster();
 	private int time;
 	private boolean fight;
 	private Button begin;
@@ -21,9 +21,9 @@ public class CombatState extends BasicGameState{
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		fight = false;
-		begin = new Button("Begin", gc.getWidth() / 2, 150, gc);
+		begin = new Button("Begin", gc.getWidth() / 2 - gc.getGraphics().getFont().getWidth("Begin") / 2, 150, gc);
 		use = new Button("Use", 100, 150, gc);
-		done = new Button("Done", gc.getWidth() / 2, 200, gc);
+		done = new Button("Done", gc.getWidth() / 2 - gc.getGraphics().getFont().getWidth("Done") / 2, 200, gc);
 		potion = new Button("Use Potion", 350, 500, gc);
 	}
 	
@@ -37,21 +37,22 @@ public class CombatState extends BasicGameState{
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		int w = gc.getWidth() / 2;
 		int h = gc.getHeight() / 2;
+		g.drawString("COMBAT", w - g.getFont().getWidth("COMBAT") / 2, 100);
 		begin.render(g);
 		potion.render(g);
-		g.drawString(player.getname(), w / 2 - 20, h - 50);
-		g.drawString("\\o/", w / 2, h - 20);
-		g.drawString(" | ", w / 2, h - 5);
-		g.drawString("/ \\", w / 2, h + 10);
-		g.drawString(player.gethealth() + "/" + player.getmaxhealth(), w / 2 - 15, h + 25);
+		g.drawString(player.getname(), w / 2 - 20, 400);
+		g.drawString("\\o/", w / 2, 420);
+		g.drawString(" | ", w / 2, 435);
+		g.drawString("/ \\", w / 2, 450);
+		g.drawString(player.gethealth() + "/" + player.getmaxhealth(), w / 2 - 15, 470);
 		
-		g.drawString(monster.getname(), w / 2 + w - 15, h - 50);
-		g.drawString("\\o/", w / 2 + w, h - 20);
-		g.drawString(" | ", w / 2 + w, h - 5);
-		g.drawString("/ \\", w / 2 + w, h + 10);
+		g.drawString(monster.getname(), w / 2 + w - 15, 400);
+		g.drawString("\\o/", w / 2 + w, 420);
+		g.drawString(" | ", w / 2 + w, 435);
+		g.drawString("/ \\", w / 2 + w, 450);
 		
 		if(!monster.getdead())
-			g.drawString(monster.gethealth() + "/" + monster.getmaxhealth(), w / 2 + w - 15, h + 25);
+			g.drawString(monster.gethealth() + "/" + monster.getmaxhealth(), w / 2 + w - 15, 470);
 		else
 		{
 			g.drawString("Dead", w / 2 + w - 40, h + 25);
@@ -59,12 +60,7 @@ public class CombatState extends BasicGameState{
 			g.drawString(monster.getLoot().getName(), 150, 150);
 			done.render(g);
 		}
-		g.drawString("Time : " + time/1000, w, 100);
 		
-		g.drawString(player.getname(), 100, 200);
-		g.drawString("" + player.getdamage(), 200, 200);
-		g.drawString("" + player.getdefense(), 250, 200);
-		g.drawString("" + player.getspeed(), 300, 200);
 	}
 
 	@Override

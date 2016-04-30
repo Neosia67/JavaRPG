@@ -39,10 +39,12 @@ public abstract class Entity {
 	public void take_damage(int i){
 		health -= i;
 		if(health < 1)
-			death();
+			setDead(true);
 	}
 	
-	public abstract void death();
+	public void setDead(boolean b){
+		dead = b;
+	}
 	
 	public int gethealth(){
 		return health;

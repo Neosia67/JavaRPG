@@ -12,9 +12,14 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Main extends StateBasedGame{
 	
 	private static Player player = new Player();
+	private static Monster monster = new Monster(Rarity.COMMON, 1);
 	
 	public static Player getPlayer(){
 		return player;
+	}
+	
+	public static Monster getMonster(){
+		return monster;
 	}
 
 	public Main(String name) {

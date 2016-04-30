@@ -10,22 +10,22 @@ import org.newdawn.slick.state.StateBasedGame;
 public class LobbyState extends BasicGameState{
 	
 	private Button inventory;
-	private Button combat;
 	private Button dungeon;
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		int w = gc.getWidth() / 2;
 		int h = gc.getHeight() / 2;
-		inventory = new Button("Inventory", w - gc.getGraphics().getFont().getWidth("Inventory") / 2, h - gc.getGraphics().getFont().getHeight("Ok") / 2 - 50, gc);
-		combat = new Button("Combat", w - gc.getGraphics().getFont().getWidth("Inventory") / 2, h - gc.getGraphics().getFont().getHeight("Ok") / 2 + 50, gc);
-		dungeon = new Button("Dungeon", w - gc.getGraphics().getFont().getWidth("Inventory") / 2, h - gc.getGraphics().getFont().getHeight("Ok") / 2 - 100, gc);
+		inventory = new Button("Inventory", w - gc.getGraphics().getFont().getWidth("Inventory") / 2, 250, gc);
+		dungeon = new Button("Dungeon", w - gc.getGraphics().getFont().getWidth("Dungeon") / 2, 300, gc);
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+		int w = gc.getWidth() / 2;
+		g.drawString("MENU", w - g.getFont().getWidth("MENU") / 2, 100);
+		
 		inventory.render(g);
-		combat.render(g);
 		dungeon.render(g);
 	}
 
@@ -37,11 +37,7 @@ public class LobbyState extends BasicGameState{
 			if(inventory.isClicked(input.getMouseX(), input.getMouseY()))
 			{
 				sbg.enterState(6);
-			}
-			if(combat.isClicked(input.getMouseX(), input.getMouseY()))
-			{
-				sbg.enterState(8);
-			}
+			}	
 			if(dungeon.isClicked(input.getMouseX(), input.getMouseY()))
 			{
 				sbg.enterState(7);

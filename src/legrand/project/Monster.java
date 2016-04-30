@@ -16,11 +16,6 @@ public class Monster extends Entity{
 		else
 			this.loot = new Armor(rarity, level);
 	}
-
-	@Override
-	public void death() {
-		dead = true;
-	}
 	
 	public Item getLoot(){
 		return this.loot;
